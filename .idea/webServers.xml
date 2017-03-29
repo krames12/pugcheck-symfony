@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ccabc09a-fcce-4d96-9413-c74fee9dca4d" name="vbox-pugcheck" url="http://192.168.1.115:8000">
+        <fileTransfer host="192.168.1.115" port="22" rootFolder="/home/nkramer/projects/pugcheck" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
