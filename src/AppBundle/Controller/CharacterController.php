@@ -8,9 +8,11 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Controller\Lookups;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+//use AppBundle\Controller\Lookups;
 
 class CharacterController extends Controller
 {
@@ -35,6 +37,7 @@ class CharacterController extends Controller
             'serverName' => $characterData->realm,
             'characterName' => $characterData->name,
             'itemLevel' => $characterData->items->averageItemLevel,
+            'characterClass' => Lookups::classLookup($characterData->class),
             'progressionData' => $progressionData,
             'data' => $characterData
         ));
@@ -62,10 +65,9 @@ class CharacterController extends Controller
                 return $raid;
                 return $raid;
             }
-
         });
 
-        return $currentRaidData[37];
+        return $currentRaidData[37]; //current last array spot. put a better fix in there.
     }
 
     protected function difficultyProgress($difficulty, $bossData) {
