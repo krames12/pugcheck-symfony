@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>PugCheck</h1>
+
+    {% include 'partials/search-form.html.twig' %}
+
+    <h3>{{ region }}</h3>
+    <p>{{ serverName }}: {{ characterName }}</p>
+
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}
