@@ -18,12 +18,4 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
         ]);
     }
-
-    /**
-     * @Route("/{region}/{serverName}/{characterName}")
-     */
-
-    public function characterShow($region, $serverName, $characterName) {
-        return $this->render('default/character.html.twig', array('region' => $region, 'serverName' => $serverName, 'characterName' => $characterName));
-    }
 }

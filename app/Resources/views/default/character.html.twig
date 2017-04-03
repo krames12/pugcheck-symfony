@@ -5,7 +5,7 @@
 
     {% include 'partials/search-form.html.twig' %}
 
-    <h3>{{ region }}</h3>
+    <h3>{{ region|upper }}</h3>
     <p>{{ serverName }}: {{ characterName }}</p>
 
     {% include 'partials/footer.html.twig' %}
