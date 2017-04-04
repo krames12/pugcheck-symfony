@@ -1,19 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>PugCheck</h1>
 
-    {% include 'partials/search-form.html.twig' %}
+    <div class="container">
+        {% include 'partials/search-form.html.twig' %}
 
-    <h3>{{ region|upper }}</h3>
-    <p>{{ serverName }}: {{ data.name }}</p>
-    <p>Class: {{ characterClass }}</p>
+        <div class="character-info">
+            <p class="character-name">{{ data.name }}</p>
+            <img src="{{ asset('images/') ~ classImage }}" alt="{{ characterClass }} symbol" class="class-icon {{
+            characterClass }}" />
+            <div class="item-level-container">
+                <p class="item-level">Item Level: <span class="item-level">{{ itemLevel }}</span></p>
+            </div>
+            <p>Class: {{ characterClass }}</p>
+        </div>
 
-    {{ dump(data) }}
+        {{ dump(data) }}
 
-    {% for boss in progressionData.bosses %}
-        <li>{{ boss.name }}</li>
-    {% endfor %}
+        {% for boss in progressionData.bosses %}
+            <li>{{ boss.name }}</li>
+        {% endfor %}
+    </div>
 
     {% include 'partials/footer.html.twig' %}
 {% endblock %}
