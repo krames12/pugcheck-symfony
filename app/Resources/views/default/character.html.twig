@@ -12,10 +12,9 @@
             <div class="item-level-container">
                 <p class="item-level">Item Level: <span class="item-level">{{ itemLevel }}</span></p>
             </div>
-            <p>Class: {{ characterClass }}</p>
         </div>
 
-        {{ dump(data) }}
+        {{ dump(progressionData) }}
 
         {% for boss in progressionData.bosses %}
             <li>{{ boss.name }}</li>
