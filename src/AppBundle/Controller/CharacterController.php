@@ -71,10 +71,10 @@ class CharacterController extends Controller
                     if($boss->mythicKills > 0) {
                         $formattedRaid->difficulty = 5;
                         $formattedRaid->highestDifficulty = 'Mythic';
-                    } else if($boss->heroicKills > 0) {
+                    } else if($boss->heroicKills > 0 && $formattedRaid->difficulty < 4) {
                         $formattedRaid->difficulty = 4;
                         $formattedRaid->highestDifficulty = 'Heroic';
-                    } else if($boss->normalKills > 0) {
+                    } else if($boss->normalKills > 0 && $formattedRaid->difficulty < 3) {
                         $formattedRaid->difficulty = 3;
                         $formattedRaid->highestDifficulty = 'Normal';
                     }

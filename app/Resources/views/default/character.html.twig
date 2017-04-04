@@ -15,40 +15,42 @@
         </div>
 
         <h3>Raid Progression</h3>
-        {% if raid.highestDifficulty == 'Mythic' %}
-            {% set difficulties = ['Mythic', 'Heroic'] %}
-        {% elseif raid.highestDifficulty == 'Heroic' %}
-            {% set difficulties = ['Heroic', 'Normal'] %}
-        {% elseif raid.highestDifficulty == 'Normal' %}
-            {% set difficulties = ['Normal', 'Looking For Raid'] %}
-        {% else %}
-            {% set difficulties = ['Looking For Raid'] %}
-        {% endif %}
         {% for raid in progressionData %}
-            {% set kills = raid.highestDifficulty|lower ~ 'Kills' %}
-            <div class="raid-instance">
-                <div class="raid-instance-title">
-                    <span class="collapse fa fa-plus"></span>
-                    <h5 class="instance-name">{{ raid.name }}</h5>
-                    <p class="difficulty">{{ raid.highestDifficulty }}</p>
-                    <p class="logs-header">Logs</p>
+            {% if raid.highestDifficulty == 'Mythic' %}
+                {% set difficulties = ['Mythic', 'Heroic'] %}
+            {% elseif raid.highestDifficulty == 'Heroic' %}
+                {% set difficulties = ['Heroic', 'Normal'] %}
+            {% elseif raid.highestDifficulty == 'Normal' %}
+                {% set difficulties = ['Normal', 'Looking For Raid'] %}
+            {% else %}
+                {% set difficulties = ['Looking For Raid'] %}
+            {% endif %}
+            {% for difficulty in difficulties %}
+                {% set kills = difficulty|lower ~ 'Kills' %}
+                <div class="raid-instance">
+                    <div class="raid-instance-title">
+                        <span class="collapse fa fa-plus"></span>
+                        <h5 class="instance-name">{{ raid.name }}</h5>
+                        <p class="difficulty">{{ difficulty }}</p>
+                        <p class="logs-header">Logs</p>
+                    </div>
+                    <ul class="raid-bosses hidden">
+                        {% for boss in raid.bosses %}
+                            <li>
+                                {% if attribute(boss, kills) > 0 %}
+                                    <span class="killed-box fa fa-check-square-o"></span>
+                                {% else %}
+                                    <span class="killed-box fa fa-square-o"></span>
+                                {% endif %}
+                                {{ boss.name }}
+                                {% if boss.reportUrl is defined %}
+                                    <a href="{{ boss.reportUrl }}" class="warcraftlog-report fa fa-link"></a>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
-                <ul class="raid-bosses hidden">
-                    {% for boss in raid.bosses %}
-                        <li>
-                            {% if attribute(boss, kills) > 0 %}
-                                <span class="killed-box fa fa-check-square-o"></span>
-                            {% else %}
-                                <span class="killed-box fa fa-square-o"></span>
-                            {% endif %}
-                            {{ boss.name }}
-                            {% if boss.reportUrl %}
-                                <a href="{{ boss.reportUrl }}" class="warcraftlog-report fa fa-link"></a>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+            {% endfor %}
         {% endfor %}
 
         {{ dump(progressionData) }}
