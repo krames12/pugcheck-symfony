@@ -8,7 +8,11 @@
     <h3>{{ region|upper }}</h3>
     <p>{{ serverName }}: {{ data.name }}</p>
 
-    {{ dump(data) }}
+    {{ dump(logData) }}
+
+    {% for boss in progressionData.bosses %}
+        <li>{{ boss.name }}</li>
+    {% endfor %}
 
     {% include 'partials/footer.html.twig' %}
 {% endblock %}

@@ -23,13 +23,12 @@ class CharacterController extends Controller
     public function characterShow($region, $serverName, $characterName) {
         $wclKey = getEnv('WCL_KEY');
         $blizzKey = getEnv('BLIZZ_KEY');
-        $cleanName = $characterName; //use $this->cleanName in the future once configured
+        $cleanName = $characterName; //use $this->cleanName in the future once you actually write it
         $blizzUrl = 'https://'.$region.'.api.battle.net/wow/character/'.$serverName.'/'.$cleanName.'?fields=progression,items&locale=en_US&apikey='.$blizzKey;
         $wclUrl = 'https://www.warcraftlogs.com:443/v1/rankings/character/'.$cleanName.'/'.$serverName.'/'.$region.'?api_key='.$wclKey;
 
-        $currentRaid = 'The Nighthold';
-
         $characterData = json_decode($this->getCharacterInfo($blizzUrl));
+        $warcraftLogsData = json_decode($this->getCharacterInfo($wclUrl));
         $progressionData = $this->parseProgressionData($characterData->progression->raids);
 
         return $this->render('default/character.html.twig', array(
@@ -39,6 +38,7 @@ class CharacterController extends Controller
             'itemLevel' => $characterData->items->averageItemLevel,
             'characterClass' => Lookups::classLookup($characterData->class),
             'progressionData' => $progressionData,
+            'logData' => $warcraftLogsData,
             'data' => $characterData
         ));
     }
