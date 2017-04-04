@@ -7,8 +7,9 @@
 
     <h3>{{ region|upper }}</h3>
     <p>{{ serverName }}: {{ data.name }}</p>
+    <p>Class: {{ characterClass }}</p>
 
-    {{ dump(logData) }}
+    {{ dump(data) }}
 
     {% for boss in progressionData.bosses %}
         <li>{{ boss.name }}</li>

@@ -35,8 +35,8 @@ class CharacterController extends Controller
             'region' => $region,
             'serverName' => $characterData->realm,
             'characterName' => $characterData->name,
-            'itemLevel' => $characterData->items->averageItemLevel,
             'characterClass' => Lookups::classLookup($characterData->class),
+            'itemLevel' => $characterData->items->averageItemLevel,
             'progressionData' => $progressionData,
             'logData' => $warcraftLogsData,
             'data' => $characterData
