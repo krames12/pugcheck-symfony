@@ -68,7 +68,7 @@ class CharacterController extends Controller
             }
         });
 
-        return $currentRaidData[37]; //current last array spot. put a better fix in there.
+        return $currentRaidData; //current last array spot. put a better fix in there.
     }
 
     protected function difficultyProgress($difficulty, $bossData) {

@@ -14,11 +14,19 @@
             </div>
         </div>
 
-        {{ dump(progressionData) }}
-
-        {% for boss in progressionData.bosses %}
-            <li>{{ boss.name }}</li>
+        <h3>Raid Progression</h3>
+        {% for raid in progressionData %}
+            <div class="raid-instance">
+                <div class="raid-instance-title">
+                    <span class="collapse fa fa-plus"></span>
+                    <h5 class="instance-name">{{ raid.name }}</h5>
+                    <p class="difficulty">Mythic</p>
+                    <p class="logs-header">Logs</p>
+                </div>
+            </div>
         {% endfor %}
+
+        {{ dump(progressionData) }}
     </div>
 
     {% include 'partials/footer.html.twig' %}
