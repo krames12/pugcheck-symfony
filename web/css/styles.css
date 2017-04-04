@@ -185,6 +185,10 @@ a:hover {
   border-bottom: 1px solid #29679a;
 }
 
+.raid-instance-title {
+    cursor: pointer;
+}
+
 .difficulty {
   text-align: center;
   margin: 3px;

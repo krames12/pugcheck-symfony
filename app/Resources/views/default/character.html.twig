@@ -16,13 +16,23 @@
 
         <h3>Raid Progression</h3>
         {% for raid in progressionData %}
+            {% set kills = raid.highestDifficulty|lower %}
+            {{ kills }}
             <div class="raid-instance">
                 <div class="raid-instance-title">
                     <span class="collapse fa fa-plus"></span>
                     <h5 class="instance-name">{{ raid.name }}</h5>
-                    <p class="difficulty">Mythic</p>
+                    <p class="difficulty">{{ raid.highestDifficulty }}</p>
                     <p class="logs-header">Logs</p>
                 </div>
+                <ul class="raid-bosses hidden">
+                    {% for boss in raid.bosses %}
+                        <li>
+                            <span class="killed-box fa fa-check-square-o"></span>
+                            {{ boss.name }}
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
         {% endfor %}
 

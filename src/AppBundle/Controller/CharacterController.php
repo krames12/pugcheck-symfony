@@ -60,11 +60,26 @@ class CharacterController extends Controller
 
     }
 
-    protected function parseProgressionData($data) {
-        $currentRaidData = array_filter($data, function($raid) {
+    protected function parseProgressionData($characterData) {
+        $currentRaidData = array_filter($characterData, function($raid) {
             if($raid->name == 'The Nighthold') {
-                return $raid;
-                return $raid;
+                $formattedRaid = $raid;
+                $formattedRaid->difficulty = 2;
+                $formattedRaid->highestDifficulty = 'Looking For Raid';
+                foreach($raid->bosses as $boss) {
+                    if($boss->mythicKills > 0) {
+                        $formattedRaid->difficulty = 5;
+                        $formattedRaid->highestDifficulty = 'Mythic';
+                    } else if($boss->heroicKills > 0) {
+                        $formattedRaid->difficulty = 4;
+                        $formattedRaid->highestDifficulty = 'Heroic';
+                    } else if($boss->normalKills > 0) {
+                        $formattedRaid->difficulty = 3;
+                        $formattedRaid->highestDifficulty = 'Normal';
+                    }
+                }
+
+                return $formattedRaid;
             }
         });
 

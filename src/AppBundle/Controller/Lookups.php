@@ -54,35 +54,35 @@ class Lookups
 
     public static function bossLookup($bossId){
         switch($bossId) {
-            case 1849:
-                return 'Skorpyron';
+            case 'Skorpyron':
+                return '1849';
                 break;
-            case 1865:
-                return 'Chronomatic Anomaly';
+            case 'Chronomatic Anomaly':
+                return 1865;
                 break;
-            case 1867:
-                return 'Trilliax';
+            case 'Trilliax':
+                return 1867;
                 break;
-            case 1871:
-                return 'Spellblade Aluriel';
+            case 'Spellblade Aluriel':
+                return 1871;
                 break;
-            case 1862:
-                return 'Tichondrius';
+            case 'Tichondrius':
+                return 1862;
                 break;
-            case 1863:
-                return 'Star Augur Etraeus';
+            case 'Star Augur Etraeus':
+                return 1863;
                 break;
-            case 1842:
-                return 'Krosus';
+            case 'Krosus':
+                return 1842;
                 break;
-            case 1886:
-                return 'High Botanist Tel\'arn';
+            case 'High Botanist Tel\'arn':
+                return 1886;
                 break;
-            case 1872:
-                return 'Grand Magistrix Elisande';
+            case 'Grand Magistrix Elisande':
+                return 1872;
                 break;
-            case 1866:
-                return 'Gul\'dan';
+            case 'Gul\'dan':
+                return 1866;
                 break;
         }
     }
