@@ -29,7 +29,7 @@ class CharacterController extends Controller
 
         $characterData = json_decode($this->getCharacterInfo($blizzUrl));
         $warcraftLogsData = json_decode($this->getCharacterInfo($wclUrl));
-        $progressionData = $this->parseProgressionData($characterData->progression->raids);
+        $progressionData = $this->parseProgressionData($characterData->progression->raids, $warcraftLogsData);
 
         return $this->render('default/character.html.twig', array(
             'region' => $region,
@@ -60,7 +60,8 @@ class CharacterController extends Controller
 
     }
 
-    protected function parseProgressionData($characterData) {
+    protected function parseProgressionData($characterData, $logData) {
+        $this->logs = $logData;
         $currentRaidData = array_filter($characterData, function($raid) {
             if($raid->name == 'The Nighthold') {
                 $formattedRaid = $raid;
@@ -76,6 +77,12 @@ class CharacterController extends Controller
                     } else if($boss->normalKills > 0) {
                         $formattedRaid->difficulty = 3;
                         $formattedRaid->highestDifficulty = 'Normal';
+                    }
+
+                    foreach($this->logs as $log) {
+                        if(Lookups::bossLookup($boss->name) == $log->encounter && $formattedRaid->difficulty == $log->difficulty) {
+                            $boss->reportUrl = 'https://www.warcraftlogs.com/reports/'.$log->reportID.'#fight='.$log->fightID;
+                        }
                     }
                 }
 
