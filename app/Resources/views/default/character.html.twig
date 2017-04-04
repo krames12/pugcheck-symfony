@@ -27,11 +27,13 @@
             {% endif %}
             {% for difficulty in difficulties %}
                 {% set kills = difficulty|lower ~ 'Kills' %}
+                {% set difficultyProgress = difficulty|lower ~ 'Progress' %}
+                {% set progress = attribute(raid, difficultyProgress) %}
                 <div class="raid-instance">
                     <div class="raid-instance-title">
                         <span class="collapse fa fa-plus"></span>
                         <h5 class="instance-name">{{ raid.name }}</h5>
-                        <p class="difficulty">{{ difficulty }}</p>
+                        <p class="difficulty">{{ progress }}/{{ raid.totalBosses }} {{ difficulty }}</p>
                         <p class="logs-header">Logs</p>
                     </div>
                     <ul class="raid-bosses hidden">

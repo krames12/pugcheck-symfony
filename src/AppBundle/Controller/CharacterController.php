@@ -65,8 +65,15 @@ class CharacterController extends Controller
         $currentRaidData = array_filter($characterData, function($raid) {
             if($raid->name == 'The Nighthold') {
                 $formattedRaid = $raid;
+                $formattedRaid->totalBosses = count($raid->bosses);
                 $formattedRaid->difficulty = 2;
                 $formattedRaid->highestDifficulty = 'Looking For Raid';
+
+                $formattedRaid->lfrProgress = $this->difficultyProgress('lfr', $raid->bosses);
+                $formattedRaid->normalProgress = $this->difficultyProgress('normal', $raid->bosses);
+                $formattedRaid->heroicProgress = $this->difficultyProgress('heroic', $raid->bosses);
+                $formattedRaid->mythicProgress = $this->difficultyProgress('mythic', $raid->bosses);
+
                 foreach($raid->bosses as $boss) {
                     if($boss->mythicKills > 0) {
                         $formattedRaid->difficulty = 5;
@@ -94,6 +101,15 @@ class CharacterController extends Controller
     }
 
     protected function difficultyProgress($difficulty, $bossData) {
+        $killSearch = $difficulty.'Kills';
+        $progress = 0;
 
+        foreach($bossData as $boss) {
+            if($boss->$killSearch > 0) {
+                $progress+= 1;
+            }
+        }
+
+        return $progress;
     }
 }
