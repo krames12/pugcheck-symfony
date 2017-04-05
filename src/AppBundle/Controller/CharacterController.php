@@ -12,6 +12,8 @@ use AppBundle\Controller\Lookups;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Entity\Servers;
 //use AppBundle\Controller\Lookups;
 
 class CharacterController extends Controller
@@ -19,7 +21,6 @@ class CharacterController extends Controller
     /**
      * @Route("/{region}/{serverName}/{characterName}")
      */
-
     public function characterShow($region, $serverName, $characterName) {
         $wclKey = getEnv('WCL_KEY');
         $blizzKey = getEnv('BLIZZ_KEY');
@@ -44,7 +45,7 @@ class CharacterController extends Controller
         ));
     }
 
-    protected function getCharacterInfo($requestUrl) {
+    public static function getCharacterInfo($requestUrl) {
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,

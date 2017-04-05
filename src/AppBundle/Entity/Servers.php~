@@ -1,0 +1,42 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: nkramer
+ * Date: 4/5/2017
+ * Time: 11:21 AM
+ */
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="servers")
+ */
+class Servers
+{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $serverName;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $serverSlug;
+
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $region;
+
+}
