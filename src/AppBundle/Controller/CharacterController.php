@@ -87,16 +87,23 @@ class CharacterController extends Controller
                     }
 
                     foreach($this->logs as $log) {
-                        if(Lookups::bossLookup($boss->name) == $log->encounter && $formattedRaid->difficulty == $log->difficulty) {
-                            $boss->reportUrl = 'https://www.warcraftlogs.com/reports/'.$log->reportID.'#fight='.$log->fightID;
+                        if(Lookups::bossLookup($boss->name) == $log->encounter) {
+                            if($log->difficulty == 5) {
+                                $boss->mythicReportUrl = 'https://www.warcraftlogs.com/reports/'.$log->reportID.'#fight='.$log->fightID;
+                            } else if($log->difficulty == 4) {
+                                $boss->heroicReportUrl = 'https://www.warcraftlogs.com/reports/'.$log->reportID.'#fight='.$log->fightID;
+                            } else if($log->difficulty == 3) {
+                                $boss->normalReportUrl = 'https://www.warcraftlogs.com/reports/'.$log->reportID.'#fight='.$log->fightID;
+                            } else if($log->difficulty == 2) {
+                                $boss->lfrReportUrl = 'https://www.warcraftlogs.com/reports/'.$log->reportID.'#fight='.$log->fightID;
+                            }
+
                         }
                     }
                 }
-
                 return $formattedRaid;
             }
         });
-
         return $currentRaidData; //current last array spot. put a better fix in there.
     }
 
@@ -109,7 +116,6 @@ class CharacterController extends Controller
                 $progress+= 1;
             }
         }
-
         return $progress;
     }
 }

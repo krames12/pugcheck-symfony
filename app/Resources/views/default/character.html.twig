@@ -26,8 +26,15 @@
                 {% set difficulties = ['Looking For Raid'] %}
             {% endif %}
             {% for difficulty in difficulties %}
-                {% set kills = difficulty|lower ~ 'Kills' %}
-                {% set difficultyProgress = difficulty|lower ~ 'Progress' %}
+                {% if difficulty == 'Looking For Raid' %}
+                    {% set kills = 'lfrKills' %}
+                    {% set difficultyProgress = 'lfrProgress' %}
+                    {% set reportUrl = 'lfrReportUrl' %}
+                {% else %}
+                    {% set kills = difficulty|lower ~ 'Kills' %}
+                    {% set difficultyProgress = difficulty|lower ~ 'Progress' %}
+                    {% set reportUrl = difficulty|lower ~ 'ReportUrl' %}
+                {% endif %}
                 {% set progress = attribute(raid, difficultyProgress) %}
                 <div class="raid-instance">
                     <div class="raid-instance-title">
@@ -45,8 +52,8 @@
                                     <span class="killed-box fa fa-square-o"></span>
                                 {% endif %}
                                 {{ boss.name }}
-                                {% if boss.reportUrl is defined %}
-                                    <a href="{{ boss.reportUrl }}" class="warcraftlog-report fa fa-link"></a>
+                                {% if attribute(boss, reportUrl) is defined %}
+                                    <a href="{{ attribute(boss, reportUrl) }}" class="warcraftlog-report fa fa-link"></a>
                                 {% endif %}
                             </li>
                         {% endfor %}
